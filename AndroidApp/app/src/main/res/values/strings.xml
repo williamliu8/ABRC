@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BT RC Car</string>
+    <string name="title_connect">Connect</string>
+    <string name="title_control">Control</string>
+</resources>
