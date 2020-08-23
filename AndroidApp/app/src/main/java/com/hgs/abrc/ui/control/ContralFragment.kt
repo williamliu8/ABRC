@@ -22,7 +22,7 @@ class ContralFragment : Fragment() {
         controlViewModel =
                 ViewModelProviders.of(this).get(ControlViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_control, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
+        val textView: TextView = root.findViewById(R.id.text_control)
         controlViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
