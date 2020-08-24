@@ -1,31 +1,146 @@
 package com.hgs.abrc.ui.control
 
+import android.bluetooth.BluetoothSocket
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.hgs.abrc.R
+import com.hgs.abrc.ui.connect.ShareSocketViewModel
+import kotlinx.android.synthetic.main.fragment_connect.*
+import kotlinx.android.synthetic.main.fragment_control.*
+import java.io.IOException
 
 class ContralFragment : Fragment() {
 
-    private lateinit var controlViewModel: ControlViewModel
+    val receiveSocketmodel: ShareSocketViewModel by activityViewModels()
+    var m_bluetoothSocket: BluetoothSocket? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        controlViewModel =
-                ViewModelProviders.of(this).get(ControlViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_control, container, false)
-        val textView: TextView = root.findViewById(R.id.text_control)
-        controlViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        receiveSocketmodel.shared_socket.observe(viewLifecycleOwner, Observer {
+            m_bluetoothSocket = it
         })
-        return root
+        return inflater.inflate(R.layout.fragment_control, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        fun sendCommand(input: String) {
+            if (m_bluetoothSocket != null) {
+                try{
+                    m_bluetoothSocket!!.outputStream.write(input.toByteArray())
+                } catch(e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        forward.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("f")
+            }
+        }
+        backward.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("b")
+            }
+        }
+        left.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("l")
+            }
+        }
+        right.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("r")
+            }
+        }
+        left.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("l")
+            }
+        }
+        stop.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("s")
+            }
+        }
+        fun disconnect() {
+            if (m_bluetoothSocket != null) {
+                try {
+                    m_bluetoothSocket!!.close()
+                    m_bluetoothSocket = null
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        disconnect.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                disconnect()
+            }
+        }
+
     }
 }
