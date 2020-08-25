@@ -56,7 +56,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("f")
+                sendCommand("f ")
             }
         }
         backward.setOnClickListener {
@@ -68,7 +68,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("b")
+                sendCommand("b ")
             }
         }
         left.setOnClickListener {
@@ -80,7 +80,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("l")
+                sendCommand("l ")
             }
         }
         right.setOnClickListener {
@@ -92,7 +92,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("r")
+                sendCommand("r ")
             }
         }
         left.setOnClickListener {
@@ -116,7 +116,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("s")
+                sendCommand("s ")
             }
         }
         fun disconnect() {
