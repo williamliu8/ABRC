@@ -56,7 +56,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("f ")
+                sendCommand("f")
             }
         }
         backward.setOnClickListener {
@@ -68,31 +68,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("b ")
-            }
-        }
-        left.setOnClickListener {
-            if (m_bluetoothSocket == null){
-                Toast.makeText(
-                    requireContext(),
-                    "Please connect to a car",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else {
-                sendCommand("l ")
-            }
-        }
-        right.setOnClickListener {
-            if (m_bluetoothSocket == null){
-                Toast.makeText(
-                    requireContext(),
-                    "Please connect to a car",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else {
-                sendCommand("r ")
+                sendCommand("b")
             }
         }
         left.setOnClickListener {
@@ -107,6 +83,19 @@ class ContralFragment : Fragment() {
                 sendCommand("l")
             }
         }
+        right.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("r")
+            }
+        }
+       
         stop.setOnClickListener {
             if (m_bluetoothSocket == null){
                 Toast.makeText(
@@ -116,7 +105,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("s ")
+                sendCommand("s")
             }
         }
         fun disconnect() {

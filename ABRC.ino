@@ -23,8 +23,8 @@ William Liu Aug 18 2020
 SoftwareSerial mySerial(10, 11); // use software UART RX, TX ,so that we can hot update firmware 
 int lspeedval=255;
 int rspeedval=252;
-int lturnspeed = 80;
-int rturnspeed = 80;
+int lturnspeed = 60;
+int rturnspeed = 60;
 bool rfw,rbw,lfw,lbw;
 void setup() {
   //Serial.begin(9600);
@@ -60,54 +60,46 @@ void speed_con(int lspeedval,int rspeedval)
 }
 void loop()
 {
-  char i=0;
-  char input[6];
-  char *token = NULL;
-  char *command[2];
-
+  char command[1];
+  char ft_value;
   if(mySerial.available())
-  //if(Serial.available())
   {
-    mySerial.readBytes(input,6);
-    //Serial.readBytes(input,6);
-    token = strtok(input," ");
-    while (token)
-    {
-      command[i] = token;
-      i++;
-      token = strtok(NULL," ");
-      
-    }
-    
-    if (!strcmp(command[0],"f"))
+    command[0]=mySerial.read();
+   
+    if (command[0]=='f')
     {
       direct_con(HIGH,LOW,HIGH,LOW);
       speed_con(lspeedval,rspeedval);
     }
-    else if(!strcmp(command[0],"b"))
+    else if(command[0]=='b')
     {
       direct_con(LOW,HIGH,LOW,HIGH);
       speed_con(lspeedval,rspeedval);
     }
-    else if(!strcmp(command[0],"l"))
+    else if(command[0]=='l')
     {
       speed_con(lspeedval*lturnspeed/100,rspeedval);
     }
-    else if(!strcmp(command[0],"r"))
+    else if(command[0]=='r')
     {
       speed_con(lspeedval,rspeedval*rturnspeed/100);
     }
-    else if(!strcmp(command[0],"s"))
+    else if(command[0]=='s')
     {
       direct_con(HIGH,HIGH,HIGH,HIGH);
     }
-    else if(!strcmp(command[0],"lf"))
+    else //command[0] 0~127 -> decrease left speed 128~255 -> decrease right speed to finetune car go straight.
     {
-      speed_con(atoi(command[1]),rspeedval);
-    }
-    else if(!strcmp(command[0],"rf"))
-    {
-      speed_con(lspeedval,atoi(command[1]));
+      ft_value = atoi(command[0]);
+      if(ft_value >= 0 and ft_value <= 127)
+      {
+        speed_con(lspeedval-ft_value ,rspeedval);  
+      }
+      else if(ft_value >= 128 and ft_value < 256)
+      {
+        ft_value -= 128;
+        speed_con(lspeedval , rspeedval-ft_value);
+      }
     }
   }
 }
