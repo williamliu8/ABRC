@@ -6,8 +6,6 @@
     <string name="bluetooth_off">BlueTooth OFF</string>
     <string name="show_pair_dev">Show Paired Devices</string>
     <string name="Search_new_dev">Search New Devices</string>
-    <string name="bt_status">BT Status</string>
-    <string name="bt_init_status">Unkown</string>
     <string name="devices">Devices</string>
     <string name="forward">Forward</string>
     <string name="backward">Backward</string>

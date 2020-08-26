@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hgs.abrc.R
 import kotlinx.android.synthetic.main.fragment_connect.*
+import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,13 +44,14 @@ class ConnectFragment : Fragment() {
     val name_list = ArrayList<Any>()
     val dev_list : ArrayList<BluetoothDevice> = ArrayList()
     private val REQUEST_CODE_ENABLE_BT:Int = 1
-    private val REQUEST_CODE_DISCOVERABLE_BT:Int = 2
 
     fun show_pairedlist(){
         devices = bAdapter.bondedDevices
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, name_list)
 
         if (!devices.isEmpty()) {
+            name_list.clear()
+            dev_list.clear()
             for (cur_device in devices) {
                 name_list.add(cur_device.name)
                 dev_list.add(cur_device)
@@ -78,7 +80,6 @@ class ConnectFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-
         when(requestCode){
             REQUEST_CODE_ENABLE_BT ->
                 if(resultCode == Activity.RESULT_OK){
@@ -95,21 +96,6 @@ class ConnectFragment : Fragment() {
                     "Couldn't turn on BT",
                     LENGTH_LONG
                 ).show()
-                }
-            REQUEST_CODE_DISCOVERABLE_BT ->
-                if(resultCode == Activity.RESULT_OK){
-                    makeText(
-                    requireContext(),
-                    "Is discoverable",
-                    LENGTH_LONG
-                    ).show()
-                }
-                else{
-                    makeText(
-                    requireContext(),
-                    "Couldn't be discoverable",
-                    LENGTH_LONG
-                    ).show()
                 }
         }
     }
@@ -172,23 +158,12 @@ class ConnectFragment : Fragment() {
             } else {
                 //turn off BT
                 bAdapter.disable()
+                device_list.setAdapter(null)
                 makeText(
                     requireContext(),
                     "BT is off now",
                     LENGTH_LONG
                 ).show()
-            }
-        }
-        //search new devices
-        btn_search_dev.setOnClickListener {
-            if (!bAdapter.isDiscovering) {
-                makeText(
-                    requireContext(),
-                    "Discovering devices",
-                    LENGTH_LONG
-                ).show()
-                val intent = Intent(Intent(BluetoothAdapter.ACTION_DISCOVERY_STARTED))
-                startActivityForResult(intent, REQUEST_CODE_DISCOVERABLE_BT)
             }
         }
 
@@ -199,20 +174,36 @@ class ConnectFragment : Fragment() {
 
         //connect to selected item
         device_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            if (m_bluetoothSocket == null){
-                val address: String = dev_list[position].address
-                val device: BluetoothDevice = bAdapter.getRemoteDevice(address)
-                m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
-                shareSocketmodel.sendSocket(m_bluetoothSocket)
-                BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
-                m_bluetoothSocket!!.connect()
-            }
-            else{
+            try {
+                if (m_bluetoothSocket == null) {
+                    makeText(
+                        requireContext(),
+                        "Connecting...Please Wait",
+                        LENGTH_LONG
+                    ).show()
+
+                    val address: String = dev_list[position].address
+                    val device: BluetoothDevice = bAdapter.getRemoteDevice(address)
+                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
+                    shareSocketmodel.sendSocket(m_bluetoothSocket)
+                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
+                    m_bluetoothSocket!!.connect()
+
+                } else {
+                    makeText(
+                        requireContext(),
+                        "Already Connected",
+                        LENGTH_LONG
+                    ).show()
+                }
+            } catch(e: IOException){
                 makeText(
                     requireContext(),
-                    "Already Connected",
+                    "Couldn't connect",
                     LENGTH_LONG
                 ).show()
+                m_bluetoothSocket!!.close()
+                m_bluetoothSocket = null
             }
             //val device: BluetoothDevice = list[position]
             //val address: String = device.address
