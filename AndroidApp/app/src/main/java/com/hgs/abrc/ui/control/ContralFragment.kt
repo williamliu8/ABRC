@@ -56,7 +56,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("f")
+                sendCommand("w")
             }
         }
         backward.setOnClickListener {
@@ -68,7 +68,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("b")
+                sendCommand("x")
             }
         }
         left.setOnClickListener {
@@ -80,7 +80,7 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("l")
+                sendCommand("a")
             }
         }
         right.setOnClickListener {
@@ -92,10 +92,34 @@ class ContralFragment : Fragment() {
                 ).show()
             }
             else {
-                sendCommand("r")
+                sendCommand("d")
             }
         }
-       
+
+        lspin.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("q")
+            }
+        }
+        rspin.setOnClickListener {
+            if (m_bluetoothSocket == null){
+                Toast.makeText(
+                    requireContext(),
+                    "Please connect to a car",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else {
+                sendCommand("e")
+            }
+        }
         stop.setOnClickListener {
             if (m_bluetoothSocket == null){
                 Toast.makeText(

@@ -4,7 +4,7 @@
     <string name="title_control">Control</string>
     <string name="bluetooth_on">BlueTooth ON</string>
     <string name="bluetooth_off">BlueTooth OFF</string>
-    <string name="show_pair_dev">Show Paired Devices</string>
+    <string name="show_pair_dev">Update Paired Devices List</string>
     <string name="Search_new_dev">Search New Devices</string>
     <string name="devices">Devices</string>
     <string name="forward">Forward</string>
@@ -13,4 +13,6 @@
     <string name="right">Right</string>
     <string name="stop">Stop</string>
     <string name="disconnect">Disconnect</string>
+    <string name="lspin">L Spin</string>
+    <string name="rspin">R Spin</string>
 </resources>
