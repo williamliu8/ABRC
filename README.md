@@ -15,10 +15,10 @@ DC gear motor x 2
 
 L298N x 1:  
 <img src="https://drive.google.com/uc?export=view&id=15L7OjhvyxIVTLsguzDvnxdhUIrZoXzcV" width="256" title="L298N">  
-
 * A dual H-Bridge motor driver which allows speed and direction control of two DC motors at the same time.  
 * Can drive DC motors that have voltages between 5 and 35V, with a peak current up to 2A.  
 * We use PWM to control speed,a good website to understand [L298N,PWM and H-Bridge](https://lastminuteengineers.com/l298n-dc-stepper-driver-arduino-tutorial/)  
+* **Remember to close 5VEN with a jumber**
 
 HC-06 x 1:  
 <img src="https://drive.google.com/uc?export=view&id=1aVFuakOrTW34kmkH0ub_FxJGJESoDFuP" width="384" title="L298N">  
