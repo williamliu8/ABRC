@@ -37,11 +37,12 @@ After assemble:
 ## Arduino UNO Firmware:  
 ### Software UART
 Receiving data from Bluetooth HC-06 module is exactly the same as receving data from a regular UART device.  
-The default baudrate of HC-06 is 38400. 
+The default baudrate of my HC-06 is 38400.  
 
 In this project, I used software UART(D10 for RX, D11 for TX) for HC-06 instead of using default UART for these reasons:  
 * When upload code to Arduino UNO, I don't have to remove HC-06.
-* If I set "#define DEBUG 1", I can send command through "Serial Monitor" in Arduino IDE to test my firmware without Bluetooth module.  
+* If I set "#define DEBUG 1", firmware receives commands from "Serial Monitor" in Arduino IDE, I can test firmware without Bluetooth module.  
+* If I set "#define DEBUG 0", firmware receives commands from "HC-06", I can print message to Serial Monitor throught default UART to get more information.  
 
 ### Commands
 The commands are in ASCII format:  
@@ -69,7 +70,7 @@ It is a good idea to make sure Hardware, Firmware and Bluetooth are working prop
 Here is how I do it in Windows 10:  
 * Pair your car (Shows HC-06) with Windows 10
 * Install "Bluetooth Serial Terminal", which you can find that in Microsoft Store.  
-* Connect HC-06 with "Bluetooth Serial Terminal"  
+* Connect HC-06 with Bluetooth Serial Terminal  
 * Type your command(for example w) into "Transmit" and "Send", you should see your car response correctly !
 <img src="https://drive.google.com/uc?export=view&id=1Wb5JC1GJQBUjEQY9G_k8r4xboWUGseXR" width="512" title="RC Car 1">  
 
