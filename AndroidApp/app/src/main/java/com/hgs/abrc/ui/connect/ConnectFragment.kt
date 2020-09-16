@@ -39,6 +39,9 @@ class ConnectFragment : Fragment() {
     //lateinit var bAdapter:BluetoothAdapter
     var bAdapter = BluetoothAdapter.getDefaultAdapter()
     lateinit var devices:Set<BluetoothDevice>
+    // 1101 means Serial Port Profile(SPP)
+    // 0000-1000-8000-00805F9B34FB are BASE_UUID
+    // reference to https://www.bluetooth.com/specifications/assigned-numbers/service-discovery/
     var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     var m_bluetoothSocket: BluetoothSocket? = null
     val name_list = ArrayList<Any>()
@@ -47,9 +50,15 @@ class ConnectFragment : Fragment() {
 
     fun show_pairedlist(){
         devices = bAdapter.bondedDevices
+        // name_list stores "name of paired devices"
+        // adapter is for "device_list" in connect fragment, it will show content in "name_list"
+        //
+        // dev_list stores "address of paired devices"
+        // We need address so that we can connect with it.
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, name_list)
 
         if (!devices.isEmpty()) {
+            // If we don't clear here, when press "update paired devices list" the list will append repetitively.
             name_list.clear()
             dev_list.clear()
             for (cur_device in devices) {
@@ -167,22 +176,18 @@ class ConnectFragment : Fragment() {
             }
         }
 
-        //display paired devices
-        //can make a function
+        // display paired devices
+        // can make a function
         // private fun pairedDeviceList() { why private?
-        //btn_show_pired_dev.setOnClickListener {
+        btn_show_pired_dev.setOnClickListener {
+            show_pairedlist()
+        }
 
         //connect to selected item
         device_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             try {
                 if (m_bluetoothSocket == null) {
-                    makeText(
-                        requireContext(),
-                        "Connecting...Please Wait",
-                        LENGTH_LONG
-                    ).show()
-
-                    val address: String = dev_list[position].address
+                    val address: String = dev_list[position].address // we need address to connect with it.
                     val device: BluetoothDevice = bAdapter.getRemoteDevice(address)
                     m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
                     shareSocketmodel.sendSocket(m_bluetoothSocket)

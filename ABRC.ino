@@ -9,14 +9,14 @@ William Liu Aug 18 2020
    turn right
    stop
  */
-#define RSP 6  //Right Speed(ENA ,PWM)
-#define LSP 5  //Left Speed(ENB ,PWM)
+#define RSP 3  //Right Speed(ENA ,PWM)
+#define LSP 6  //Left Speed(ENB ,PWM)
 
-#define RFW 4  // Right Foward (IN2 ,Clock Wise)
-#define RBW 12 // Right Backward (IN1 ,Counter Clock Wise)
+#define RFW 5  // Right Foward (IN2 ,Clock Wise)
+#define RBW 4 // Right Backward (IN1 ,Counter Clock Wise)
 
-#define LFW 7 //Left Foward (IN3 ,Counter Clock Wise)
-#define LBW 8 //Left Backward (IN4, ClockWise)
+#define LFW 8 //Left Foward (IN3 ,Counter Clock Wise)
+#define LBW 7 //Left Backward (IN4, ClockWise)
 #define DEBUG 0
 #include <stdlib.h>
 #include <SoftwareSerial.h>

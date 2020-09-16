@@ -38,10 +38,21 @@
             android:text="Plz click on the device you would like to connect"
             android:textSize="18sp" />
 
-        <ListView
-            android:id="@+id/device_list"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="434dp" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/device_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="434dp" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,7 +65,7 @@
         android:id="@+id/disconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:text="@string/disconnect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,9 +76,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:text="@string/lspin"
         app:layout_constraintEnd_toStartOf="@+id/backward"
-        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/left" />
 
@@ -86,12 +88,12 @@
         android:id="@+id/rspin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
         android:text="@string/rspin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toEndOf="@+id/backward"
         app:layout_constraintTop_toBottomOf="@+id/right" />
 </androidx.constraintlayout.widget.ConstraintLayout>
