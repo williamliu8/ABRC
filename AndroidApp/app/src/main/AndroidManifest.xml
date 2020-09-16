@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hgs.abrc">
     <!--Permissions-->
+    //BT Step 1 : Get Bluetooth permissions
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-
+    //BT Step 1 Ends
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"

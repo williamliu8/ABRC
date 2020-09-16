@@ -35,9 +35,9 @@ class ShareSocketViewModel : ViewModel() {
 class ConnectFragment : Fragment() {
 
     val shareSocketmodel: ShareSocketViewModel by activityViewModels()
-    //bluetooth adapter
-    //lateinit var bAdapter:BluetoothAdapter
+    //BT Step 2 : get the BluetoothAdapter
     var bAdapter = BluetoothAdapter.getDefaultAdapter()
+    //BT Step 2 Ends
     lateinit var devices:Set<BluetoothDevice>
     // 1101 means Serial Port Profile(SPP)
     // 0000-1000-8000-00805F9B34FB are BASE_UUID
@@ -47,7 +47,7 @@ class ConnectFragment : Fragment() {
     val name_list = ArrayList<Any>()
     val dev_list : ArrayList<BluetoothDevice> = ArrayList()
     private val REQUEST_CODE_ENABLE_BT:Int = 1
-
+    // BT Step 4 : Query paired devices
     fun show_pairedlist(){
         devices = bAdapter.bondedDevices
         // name_list stores "name of paired devices"
@@ -74,6 +74,7 @@ class ConnectFragment : Fragment() {
             ).show()
         }
     }
+    // BT Step 4 Ends
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -149,9 +150,10 @@ class ConnectFragment : Fragment() {
                     LENGTH_LONG
                 ).show()
             } else {
-                //turn on BT
+                //BT Step 3 : turn on BT
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(intent, REQUEST_CODE_ENABLE_BT)
+                //BT Step 3 Ends
             }
         }
 
@@ -177,8 +179,6 @@ class ConnectFragment : Fragment() {
         }
 
         // display paired devices
-        // can make a function
-        // private fun pairedDeviceList() { why private?
         btn_show_pired_dev.setOnClickListener {
             show_pairedlist()
         }
@@ -186,14 +186,15 @@ class ConnectFragment : Fragment() {
         //connect to selected item
         device_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             try {
+                //BT Step 5 : Connect and get a socket
                 if (m_bluetoothSocket == null) {
-                    val address: String = dev_list[position].address // we need address to connect with it.
-                    val device: BluetoothDevice = bAdapter.getRemoteDevice(address)
-                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
-                    shareSocketmodel.sendSocket(m_bluetoothSocket)
+                    val address: String = dev_list[position].address // get address of selected device.
+                    val device: BluetoothDevice = bAdapter.getRemoteDevice(address) // get remote device
+                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID) //create a socket with remote device
+                    shareSocketmodel.sendSocket(m_bluetoothSocket) //save socket into Viewmodel, so that "control fragment" can see it.
                     BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
-                    m_bluetoothSocket!!.connect()
-
+                    m_bluetoothSocket!!.connect() // connect with remote device
+                //BT Step 5 Ends
                 } else {
                     makeText(
                         requireContext(),

@@ -32,7 +32,7 @@ class ContralFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        // BT Step 6 : Send command
         fun sendCommand(input: String) {
             if (m_bluetoothSocket != null) {
                 try{
@@ -42,6 +42,7 @@ class ContralFragment : Fragment() {
                 }
             }
         }
+        // BT Step 6 Ends
         forward.setOnClickListener {
             if (m_bluetoothSocket == null){
                 Toast.makeText(
@@ -127,6 +128,7 @@ class ContralFragment : Fragment() {
                 sendCommand("s")
             }
         }
+        // BT Step 7 : Disconnect
         fun disconnect() {
             if (m_bluetoothSocket != null) {
                 try {
@@ -137,6 +139,7 @@ class ContralFragment : Fragment() {
                 }
             }
         }
+        // BT Step 7 Ends
         disconnect.setOnClickListener {
             if (m_bluetoothSocket == null){
                 Toast.makeText(
