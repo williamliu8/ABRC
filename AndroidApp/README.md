@@ -62,4 +62,16 @@ Please refer to these two websites
 1.[Bluetooth overview](https://developer.android.com/guide/topics/connectivity/bluetooth#ConnectDevices)  
 2.[android.bluetooth](https://developer.android.com/reference/android/bluetooth/package-summary)  
 
+## About UUID
+UUID means Universally Unique Identifier  
+We need to use one to get the socket to communicate with the car.  
+In this project, I use : 00001101-0000-1000-8000-00805F9B34FB  
+00001101 means Serial Port Profile(SPP)  
+0000-1000-8000-00805F9B34FB is BASE_UUID  
+Please reference to this website:[UUID](https://www.bluetooth.com/specifications/assigned-numbers/service-discovery/)  
+
+## Reference codes and video  
+1. https://github.com/bauerjj/Android-Simple-Bluetooth-Example
+2. https://github.com/appsinthesky/Kotlin-Bluetooth
+3. https://www.youtube.com/watch?v=PtN6UTIu7yw  
 Have Fun!
