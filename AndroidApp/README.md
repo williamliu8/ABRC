@@ -1,4 +1,4 @@
-<img src="https://drive.google.com/uc?export=view&id=1eE8MdbIhKJGlsQB1qWiPZafB-OgRPxRF" width="64" title="Appicon">  
+<img src="https://user-images.githubusercontent.com/50005966/93687112-05465d00-fa70-11ea-8058-377a8074266f.png" width="64" title="Appicon">  
 
 ## Introduction  
 I've tested functions with  
@@ -15,7 +15,7 @@ When I tested Note 3 and ZTE Amazing A30, I couldn't pair with HC-06, but after 
 ## Functions and Screen Shoot    
 |Connect|Control|
 |--------|--------|
-|<img src="https://drive.google.com/uc?export=view&id=1_PI6GuUjeai_eey-yLW3g-x-qMEZKJz7" width="256" title="Connect">|<img src="https://drive.google.com/uc?export=view&id=1e6PgEim29MLYSggxGM27V3wvvR7OylTP" width="256" title="Control">|  
+|<img src="https://user-images.githubusercontent.com/50005966/93687331-cc0eec80-fa71-11ea-94c9-4fde8530816f.jpg" width="256" title="Connect">|<img src="https://user-images.githubusercontent.com/50005966/93687333-d204cd80-fa71-11ea-812b-7b48d1e005ff.jpg" width="256" title="Control">|  
 
 Connect Functions:  
 * Detect your Android device support Bluetooth or not.
@@ -39,7 +39,7 @@ Control Functions:
   * The data life cicle in ViewModel is very long, please refer to:  
   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)  
   * After connect with the car in "connect fragment", user needs to disconnect in "control fragment", so I use ViewModel to share Bluetooth socket between fragments.  
-  <img src="https://drive.google.com/uc?export=view&id=1wpvI_zTRmFbVtvRuEwXEaB4jeyv8Qh2e" width="256" title="ViewModelLifeCycle">  
+  <img src="https://user-images.githubusercontent.com/50005966/93687334-da5d0880-fa71-11ea-9124-137f56c2405d.JPG" width="256" title="ViewModelLifeCycle">  
 * ListView  
   * ArrayAdapter:  
   Stores names of paired devices so that ListView can display them.
