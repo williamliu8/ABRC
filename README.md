@@ -7,8 +7,8 @@ Depository includes : Android App(software) + Arduino UNO(firmware) files
 This is an interesting project that includes `hardware,firmware and software.`  
 You will be able to use the app to connect to the car with bluetooth and control it.  
 That's fun !  
-[Demo Video 1](https://drive.google.com/file/d/1XKBzJSUhsBJ8SS74sKQXuq67VgESFzT3/view?usp=sharing)  
-[Demo Video 2](https://drive.google.com/file/d/1YboXPtHKsL6V_Dz8LkaTyKyxLYmLadPt/view?usp=sharing)
+[Basic Function Demo Video](https://drive.google.com/file/d/13gXhT4pooV8qt-mSG_0cp-LC449euMVp/view?usp=sharing)  
+[Tricky Move Demo Video](https://drive.google.com/file/d/1sKDTu_KiUotA5-jSK2cjQkLTm-fog_ia/view?usp=sharing)
 
 ## Hardware:   
 Arduino UNO Rev 3 x 1  
